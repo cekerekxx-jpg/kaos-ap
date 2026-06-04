@@ -9,11 +9,12 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.10'
+      - name: Install dependencies
+        run: pip install flet
       - name: Build APK
-        run: |
-          pip install flet
-          flet build apk --yes
-      - uses: actions/upload-artifact@v4
+        run: flet build apk --yes
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
         with:
           name: app-release
           path: build/apk/app-release.apk
