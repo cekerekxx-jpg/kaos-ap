@@ -9,10 +9,14 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.10'
-      - name: Install dependencies
+      - name: Install Flet
         run: pip install flet
       - name: Build APK
-        run: flet build apk --yes
+        env:
+          # Flet'in soru sormasını engellemek için otomatik değerler
+          FLET_PROJECT_NAME: "KaosApp"
+        run: |
+          flet build apk --project KaosApp --module main.py --yes
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
